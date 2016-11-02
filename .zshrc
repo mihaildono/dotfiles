@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+source ~/.profile
 
 export TERM=xterm-256color
 
@@ -12,11 +13,8 @@ export ALTERNATE_EDITOR=""
 
 eval "$(jump shell zsh)"
 
-eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$HOME/.rbenv/shims:$PATH"
-export PATH="$HOME/.rbenv/shims/ruby:$PATH"
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+eval "$(rbenv init -)"
 
 # Path to your oh-my-zsh installation.
   export ZSH=/home/stein/.oh-my-zsh
@@ -70,7 +68,6 @@ HIST_STAMPS="dd.mm.yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 # TODO: add tmux plugin
 plugins=(git sudo bundle command-not-found github lol nyan rails ruby)
-
 
 source $ZSH/oh-my-zsh.sh
 
@@ -134,3 +131,5 @@ alias gcl="git clone"
 alias gl="git log --pretty=format:'%C(yellow)%h %Cred%ar %Cblue%an%Cgreen%d %Creset%s' --date=short"
 alias grbi="git rebase -i"
 alias grb="git rebase"
+
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
