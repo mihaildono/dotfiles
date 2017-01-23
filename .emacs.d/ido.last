@@ -1,0 +1,29 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/mihail/.emacs.d/" . "lisp/")
+ ("/home/mihail/" . ".emacs.d/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/mihail/.emacs.d/lisp/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "setup-themes.el"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/mihail/.emacs.d/lisp/" (22661 60656 829654 761000) "setup-packages.el" "setup-settings.el" "setup-services.el~" "setup-settings.el~" "setup-packages.el~" "setup-defuns.el" "setup-themes.el" "./" "../" "setup-defuns.el~" "setup-keybindings.el~" "setup-keybindings.el")
+
+ ("/home/mihail/.emacs.d/" (22661 60765 987206 27000) "auto-save-list/" ".gitignore" ".projectile" "places" ".git/" "./" "var/" "lisp/" "../" "elpa/" "backups/" "init.el")
+
+ ("/home/mihail/" (22661 60775 686988 242000) ".steampid" ".xsession-errors.old" ".config/" ".nv/" "jump_0.7.1_amd64.deb" ".wget-hsts" ".oh-my-zsh/" ".gnome2_private/" "html/" ".steampath" ".zsh-update" ".bashrc" ".pulse-cookie" ".jump/" "node_modules/" ".python_history" ".node_repl_history" ".xbindkeysrc" ".dmrc" "ibm/" "rolev-js.zip" "Public/" "Documents/" "jump_0.7.1_amd64.deb.1" ".xsession-errors" "Pictures/" ".gitconfig" ".ssh/" "pythoning/" ".Xauthority" ".local/" "Personal/" "python/" ".zcompdump-mihailPC-5.1.1" ".macromedia/" ".#s.c" ".zshrc" ".sudo_as_admin_successful" ".gnome2/" ".gconf/" ".zshrc.pre-oh-my-zsh" "examples.desktop" "Videos/" ".pki/" "jsWS/" ".profile" ".thunderbird/" ".cache/" ".gnome/" ".steam/" "./" ".lesshst" ".gnupg/" ".ICEauthority" "steam.deb" ".zsh_history" ".npm/" ".bash_logout" ".zsh/" ".erc/" "../" ".Skype/" ".emacs.d/" "Music/" ".zcompdump" "rolev-js/" "Downloads/" "Templates/" ".mozilla/" "dotfiles/" ".bash_history" "javascripting/" "Desktop/" ".adobe/")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
