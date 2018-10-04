@@ -1,3 +1,9 @@
+;;; package --- Summary
+;;; Commentary:
+;;; my config, enjoy :)
+
+;;; Code:
+
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOM FUNCTIONS ;;
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -68,51 +74,7 @@
 
 (defun init-install-packages ()
   (packages-install
-   '(
-     ivy
-     swiper
-     counsel
-     dash
-     jedi
-     anzu
-     use-package
-
-     projectile
-     exec-path-from-shell
-
-     ace-jump-mode
-     ace-jump-buffer
-     expand-region
-
-     guide-key
-     git-gutter
-     indent-guide
-     git-timemachine
-     golden-ratio
-     browse-kill-ring
-     volatile-highlights
-     idle-highlight-mode
-
-     zenburn-theme
-
-     magit
-     restclient
-
-     flycheck
-
-     rbenv
-     rubocop
-
-     anaconda-mode
-
-     js2-mode
-
-     web-mode
-     scss-mode
-     less-css-mode
-     markdown-mode
-
-     smartparens)))
+   '(use-package)))
 
 (condition-case nil
     (init-install-packages)
@@ -129,10 +91,14 @@
 ;; =============================================================================
 ;; Build-in
 
+(use-package restclient)
+(use-package rubocop)
+(use-package less-css-mode)
 
 (use-package midnight) ;; Clean up obsolete buffers automatically.
 
-(use-package dash)
+(use-package dash
+  :ensure t)
 
 (use-package dired-x   ;; Load some advanced dired functions.
   :bind (("C-x C-j"   . dired-jump)))
@@ -146,6 +112,8 @@
          (setq save-place-file "~/.emacs.d/places")))
 
 (use-package anzu
+  :ensure t
+  :diminish anzu-mode
   :config
   (global-anzu-mode +1))
 
@@ -156,6 +124,7 @@
       (add-hook 'text-mode-hook 'turn-on-flyspell))))
 
 (use-package flyspell
+  :hook (prog-mode-hook . flycheck-mode)
   :config
   (progn
     (define-key flyspell-mode-map (kbd "C-;") nil)))
@@ -231,81 +200,134 @@
 ;; -----------------------------------------------------------------------------
 ;; Utilities
 
+(use-package diminish
+  :ensure t)
+
+(use-package auto-package-update
+  :ensure t
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-hide-results t)
+  (auto-package-update-maybe))
+
+(use-package idle-highlight-mode
+       :ensure t
+       :config (add-hook 'prog-mode-hook '(lambda () (idle-highlight-mode t))))
+
+(use-package anaconda-mode
+  :ensure t
+  :hook python-mode-hook)
+
+(use-package git-timemachine
+  :ensure t)
+
+(use-package tern
+  :ensure t
+  :ensure-system-package (tern . "npm i -g tern")
+  :hook (js2-mode-hook . tern-mode))
+
+(use-package use-package-ensure-system-package
+  :ensure t)
+
 (use-package ivy
+  :ensure t
   :config (ivy-mode 1))
 
 (use-package swiper
+  :ensure t
   :bind
   ([remap isearch-forward]  . swiper)
   ([remap isearch-backward] . swiper))
 
 (use-package counsel
+  :ensure t
   :bind
     ("M-x" . counsel-M-x))
 
-
 (use-package jedi
+  :ensure t
   :config
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t
         jedi:use-shortcuts t))
 
 (use-package exec-path-from-shell
+  :ensure t
   :config (exec-path-from-shell-initialize))
 
-(require 'volatile-highlights)
-(volatile-highlights-mode t)
+(use-package volatile-highlights
+  :diminish volatile-highlights
+  :ensure t
+  :init (volatile-highlights-mode t))
 
 (use-package golden-ratio
-  :init (golden-ratio-mode 1)
-  :diminish golden-ration-mode)
+  :ensure t
+  :diminish golden-ratio-mode
+  :init (golden-ratio-mode 1))
 
 (use-package guide-key
+  :ensure t
   :config (progn (setq guide-key/guide-key-sequence t)
                  (setq guide-key/recursive-key-sequence-flag t)
                  (setq guide-key/popup-window-position 'right))
   :init (guide-key-mode 1))
 
 (use-package flycheck
+  :ensure t
+  :ensure-system-package
+  ((pylint . "pip install pylint")
+   (flake8 . "pip install flake8"))
+  :config (flycheck-add-next-checker 'python-flake8 'python-pylint)
   :init (global-flycheck-mode +1))
 
 (use-package expand-region
+  :ensure t
   :bind ("C-;" . er/expand-region))
 
 (use-package ace-jump-mode
+  :ensure t
   :bind (("C-c SPC"   . ace-jump-mode)))
 
 (use-package ace-jump-buffer
+  :ensure t
   :bind ("C-c C-SPC" . ace-jump-buffer))
 
 (use-package browse-kill-ring
+  :ensure t
   :bind (("M-y" . browse-kill-ring)))
 
 (use-package magit
+  :ensure t
   :bind (("C-c s" . magit-status)))
 
 (use-package projectile
+  :ensure t
   :bind (("C-c C-f" . projectile-find-file)
          ("C-c C-d" . projectile-find-dir))
-  :init (projectile-global-mode))
+  :init (projectile-mode))
 
 (use-package rbenv
+  :ensure t
   :config (global-rbenv-mode))
 
 (use-package git-gutter
+  :ensure t
   :init (global-git-gutter-mode +1)
   :diminish git-gutter-mode)
 
 (use-package indent-guide
+  :diminish indent-guide-mode
+  :ensure t
   :init (indent-guide-mode +1))
 
 (use-package scss-mode
+  :ensure t
   :config (progn
             (setq scss-compile-at-save nil)
             (setq css-indent-offset 2)))
 
-;; Smartparens
-(use-package smartparens-config
+(use-package smartparens
+  :ensure t
   :bind ("C-K" . sp-kill-hybrid-sexp)
   :init
   (progn
@@ -314,15 +336,13 @@
 
     (smartparens-global-mode t)
     (show-smartparens-global-mode t)
-    (sp-use-paredit-bindings)
-
-    (add-hook 'lisp-mode-hook 'smartparens-strict-mode)
-    (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)))
+    (sp-use-paredit-bindings)))
 
 ;; -----------------------------------------------------------------------------
 ;; Major modes
 
 (use-package js2-mode
+  :ensure t
   :mode ("\\.jsx?\\'" . js2-mode)
   :config
   (progn
@@ -333,11 +353,13 @@
      '(js2-missing-semi-one-line-override t))))
 
 (use-package markdown-mode
+  :ensure t
   :mode (("\\.md$" . markdown-mode)
          ("\\.mkd$" . markdown-mode)
          ("\\.markdown$" . markdown-mode)))
 
 (use-package web-mode
+  :ensure t
   :mode (("\\.phtml\\'" . web-mode)
          ("\\.tpl\\.php\\'" . web-mode)
          ("\\.blade\\.php\\'" . web-mode)
@@ -368,11 +390,10 @@
 ;; =============================================================================
 ;; Hooks
 
+
 ;; Remove whitespace when saving
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(add-hook 'prog-mode-hook '(lambda () (idle-highlight-mode t)))
-(add-hook 'prog-mode-hook 'flycheck-mode)
 (add-hook 'prog-mode-hook 'indent-guide-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
@@ -384,13 +405,11 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
-(add-hook 'js2-mode-hook 'tern-mode)
-(add-hook 'python-mode-hook 'anaconda-mode)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL SETTINGS ;;
 ;;;;;;;;;;;;;;;;;;;;;;
+
 
 ;; Remove all distractions.
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -505,7 +524,6 @@
 ;; Save all backup files in /backups.
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
                                                "backups"))))
-
 ;; Save current session
 (desktop-save-mode t)
 
@@ -527,7 +545,6 @@
 ;; fix popup menus width
 (setq ac-max-width 0.5)
 
-
 (global-set-key (kbd "C-a") 'smarter-move-beginning-of-line)
 (global-set-key (kbd "M-P") 'move-line-up)
 (global-set-key (kbd "M-N") 'move-line-down)
@@ -536,32 +553,9 @@
 ;; THEMES ;;
 ;;;;;;;;;;;;
 
-(load-theme 'zenburn t)
 
+(use-package zenburn-theme
+  :ensure t
+  :config (load-theme 'zenburn t))
 
-;;;;;;;;;;;
-;; OTHER ;;
-;;;;;;;;;;;
-
-
-;;;;;;;;;;;;;;;;;;;
-;; END OF CONFIG ;;
-;;;;;;;;;;;;;;;;;;;
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(js-indent-level 2)
- '(js2-missing-semi-one-line-override t)
- '(js2-strict-missing-semi-warning nil)
- '(package-selected-packages
-   (quote
-    (zop-to-char zenburn-theme yari yaml-mode which-key web-mode volatile-highlights use-package undo-tree smex smartrep smartparens smart-mode-line scss-mode ruby-tools rubocop rjsx-mode restclient rbenv rainbow-mode rainbow-delimiters quickrun ov operate-on-number multiple-cursors move-text mediawiki markdown-mode magit less-css-mode key-chord jsx-mode json-mode jedi iy-go-to-char inf-ruby indent-guide imenu-anywhere ido-vertical-mode ido-ubiquitous idle-highlight-mode htmlize helm-projectile helm-descbinds helm-ag guru-mode guide-key grizzl golden-ratio god-mode gitignore-mode gitconfig-mode git-timemachine git-gutter-fringe git-gutter-fringe+ gist geiser flycheck flx-ido expand-region exec-path-from-shell elisp-slime-nav easy-kill discover-my-major diminish diff-hl crux counsel company-tern company-jedi browse-kill-ring beacon anzu anaconda-mode ace-window ace-jump-mode ace-jump-buffer))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;;; init.el ends here
