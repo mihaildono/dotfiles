@@ -91,8 +91,6 @@
 ;; =============================================================================
 ;; Build-in
 
-(use-package restclient)
-(use-package rubocop)
 (use-package less-css-mode)
 
 (use-package midnight) ;; Clean up obsolete buffers automatically.
@@ -221,10 +219,21 @@
 (use-package git-timemachine
   :ensure t)
 
-(use-package tern
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (eldoc-mode +1)
+  (company-mode +1)
+  (tide-hl-identifier-mode +1))
+
+(use-package tide
   :ensure t
-  :ensure-system-package (tern . "npm i -g tern")
-  :hook (js2-mode-hook . tern-mode))
+  :config
+  (add-hook 'js2-mode-hook #'setup-tide-mode)
+  (add-hook 'js2-jsx-mode-hook #'setup-tide-mode))
+
+(use-package company
+  :ensure t)
 
 (use-package use-package-ensure-system-package
   :ensure t)
