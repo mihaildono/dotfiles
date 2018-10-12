@@ -17,7 +17,7 @@ $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 * * Create ssh key for github
 * * Remap caps lock to ctrl
 ``` sh
-$ sudo apt install git virtualenv terminator zsh gnome-tweak-tool nodejs
+$ sudo apt install git virtualenv terminator zsh gnome-tweak-tool nodejs setuptools wheel 
 ```
 * Setup terminal
 ``` sh

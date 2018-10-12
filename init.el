@@ -201,6 +201,10 @@
 (use-package diminish
   :ensure t)
 
+(use-package dumb-jump
+  :ensure t
+  :config (dumb-jump-mode))
+
 (use-package auto-package-update
   :ensure t
   :config
@@ -233,7 +237,16 @@
   (add-hook 'js2-jsx-mode-hook #'setup-tide-mode))
 
 (use-package company
-  :ensure t)
+  :ensure t
+  :config
+  (global-company-mode)
+  (company-mode +1)
+  (setq company-idle-delay 0.5)
+  (setq company-tooltip-limit 10)
+  (setq company-minimum-prefix-length 2)
+  (global-set-key (kbd "<C-tab>") 'company-complete)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
 (use-package use-package-ensure-system-package
   :ensure t)
@@ -253,12 +266,15 @@
   :bind
     ("M-x" . counsel-M-x))
 
-(use-package jedi
+(use-package company-jedi
   :ensure t
   :config
   (add-hook 'python-mode-hook 'jedi:setup)
-  (setq jedi:complete-on-dot t
-        jedi:use-shortcuts t))
+  (setq jedi:complete-on-dot t)
+  (setq jedi:use-shortcuts t)
+  (defun config/enable-company-jedi ()
+    (add-to-list 'company-backends 'company-jedi))
+  (add-hook 'python-mode-hook 'config/enable-company-jedi))
 
 (use-package exec-path-from-shell
   :ensure t
