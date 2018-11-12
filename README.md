@@ -17,7 +17,7 @@ $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 * * Create ssh key for github
 * * Remap caps lock to ctrl
 ``` sh
-$ sudo apt install git virtualenv terminator zsh gnome-tweak-tool nodejs
+$ sudo apt install git virtualenv terminator zsh gnome-tweak-tool nodejs python-pip
 ```
 * Setup terminal
 ``` sh
@@ -36,12 +36,6 @@ $ sudo apt install emacs26
 * Install npm packages
 ``` sh
 $ sudo npm install -g tern eslint babel-eslint eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y pure-prompt eslint-config-airbnb
-```
-* Setup pure prompt for zsh - https://github.com/sindresorhus/pure
-``` sh
-$ cd /usr/lib/node_modules/pure-prompt
-$ sudo ln -sf "$PWD/pure.zsh" /usr/local/share/zsh/site-functions//prompt_pure_setup
-$ sudo ln -sf "$PWD/async.zsh" /usr/local/share/zsh/site-functions//async
 ```
 * Setup linters
 ``` sh
