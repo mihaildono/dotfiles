@@ -311,7 +311,7 @@
 
 (use-package ace-jump-mode
   :ensure t
-  :bind (("C-c SPC"   . ace-jump-mode)))
+  :bind (("C-c SPC"   . ace-jump-char-mode)))
 
 (use-package ace-jump-buffer
   :ensure t
