@@ -375,7 +375,8 @@
     (custom-set-variables
      '(js2-basic-offset 2)
      '(js2-strict-missing-semi-warning nil)
-     '(js2-missing-semi-one-line-override t))))
+     '(js2-missing-semi-one-line-override t)
+     '(sgml-basic-offset 4))))
 
 (use-package markdown-mode
   :ensure t
