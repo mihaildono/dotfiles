@@ -368,7 +368,7 @@
 
 (use-package js2-mode
   :ensure t
-  :mode ("\\.jsx?\\'" . js2-mode)
+  :mode ("\\.jsx?\\'" . js2-jsx-mode)
   :config
   (progn
     (define-key js2-mode-map (kbd "M-j") nil)
