@@ -325,6 +325,9 @@
   :ensure t
   :bind (("C-c s" . magit-status)))
 
+(use-package pt
+  :ensure t)
+
 (use-package projectile
   :ensure t
   :init (projectile-mode)
