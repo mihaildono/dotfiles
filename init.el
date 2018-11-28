@@ -327,9 +327,10 @@
 
 (use-package projectile
   :ensure t
-  :bind (("C-c C-f" . projectile-find-file)
-         ("C-c C-d" . projectile-find-dir))
-  :init (projectile-mode))
+  :init (projectile-mode)
+  :config
+  (setq projectile-completion-system 'ivy)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (use-package rbenv
   :ensure t
