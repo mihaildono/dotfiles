@@ -82,6 +82,8 @@
    (package-refresh-contents)
    (init-install-packages)))
 
+(setq use-package-always-defer t)
+(setq use-package-always-ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE SETTINGS ;;
@@ -95,8 +97,7 @@
 
 (use-package midnight) ;; Clean up obsolete buffers automatically.
 
-(use-package dash
-  :ensure t)
+(use-package dash)
 
 (use-package dired-x   ;; Load some advanced dired functions.
   :bind (("C-x C-j"   . dired-jump)))
@@ -110,7 +111,6 @@
          (setq save-place-file "~/.emacs.d/places")))
 
 (use-package anzu
-  :ensure t
   :diminish anzu-mode
   :config
   (global-anzu-mode +1))
@@ -198,30 +198,24 @@
 ;; -----------------------------------------------------------------------------
 ;; Utilities
 
-(use-package diminish
-  :ensure t)
+(use-package diminish)
 
 (use-package dumb-jump
-  :ensure t
   :config (dumb-jump-mode))
 
 (use-package auto-package-update
-  :ensure t
   :config
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
 
 (use-package idle-highlight-mode
-       :ensure t
-       :config (add-hook 'prog-mode-hook '(lambda () (idle-highlight-mode t))))
+  :config (add-hook 'prog-mode-hook '(lambda () (idle-highlight-mode t))))
 
 (use-package anaconda-mode
-  :ensure t
   :hook python-mode-hook)
 
-(use-package git-timemachine
-  :ensure t)
+(use-package git-timemachine)
 
 (defun setup-tide-mode ()
   (interactive)
@@ -231,13 +225,12 @@
   (tide-hl-identifier-mode +1))
 
 (use-package tide
-  :ensure t
   :config
   (add-hook 'js2-mode-hook #'setup-tide-mode)
   (add-hook 'js2-jsx-mode-hook #'setup-tide-mode))
 
 (use-package company
-  :ensure t
+  :diminish company
   :config
   (global-company-mode)
   (company-mode +1)
@@ -248,26 +241,22 @@
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
-(use-package use-package-ensure-system-package
-  :ensure t)
+(use-package use-package-ensure-system-package)
 
 (use-package ivy
-  :ensure t
+  :diminish ivy
   :config (ivy-mode 1))
 
 (use-package swiper
-  :ensure t
   :bind
   ([remap isearch-forward]  . swiper)
   ([remap isearch-backward] . swiper))
 
 (use-package counsel
-  :ensure t
   :bind
     ("M-x" . counsel-M-x))
 
 (use-package company-jedi
-  :ensure t
   :config
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t)
@@ -277,28 +266,23 @@
   (add-hook 'python-mode-hook 'config/enable-company-jedi))
 
 (use-package exec-path-from-shell
-  :ensure t
   :config (exec-path-from-shell-initialize))
 
 (use-package volatile-highlights
   :diminish volatile-highlights
-  :ensure t
   :init (volatile-highlights-mode t))
 
 (use-package golden-ratio
-  :ensure t
   :diminish golden-ratio-mode
   :init (golden-ratio-mode 1))
 
 (use-package guide-key
-  :ensure t
   :config (progn (setq guide-key/guide-key-sequence t)
                  (setq guide-key/recursive-key-sequence-flag t)
                  (setq guide-key/popup-window-position 'right))
   :init (guide-key-mode 1))
 
 (use-package flycheck
-  :ensure t
   :ensure-system-package
   ((pylint . "pip install pylint")
    (flake8 . "pip install flake8"))
@@ -306,57 +290,45 @@
   :init (global-flycheck-mode +1))
 
 (use-package expand-region
-  :ensure t
   :bind ("C-;" . er/expand-region))
 
 (use-package ace-jump-mode
-  :ensure t
   :bind (("C-c SPC"   . ace-jump-char-mode)))
 
 (use-package ace-jump-buffer
-  :ensure t
   :bind ("C-c C-SPC" . ace-jump-buffer))
 
 (use-package browse-kill-ring
-  :ensure t
   :bind (("M-y" . browse-kill-ring)))
 
 (use-package magit
-  :ensure t
   :bind (("C-c s" . magit-status)))
 
-(use-package pt
-  :ensure t)
+(use-package pt)
 
 (use-package projectile
-  :ensure t
   :init (projectile-mode)
   :config
   (setq projectile-completion-system 'ivy)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (use-package rbenv
-  :ensure t
   :config (global-rbenv-mode))
 
 (use-package git-gutter
-  :ensure t
   :init (global-git-gutter-mode +1)
   :diminish git-gutter-mode)
 
 (use-package indent-guide
   :diminish indent-guide-mode
-  :ensure t
   :init (indent-guide-mode +1))
 
 (use-package scss-mode
-  :ensure t
   :config (progn
             (setq scss-compile-at-save nil)
             (setq css-indent-offset 2)))
 
 (use-package smartparens
-  :ensure t
   :bind ("C-K" . sp-kill-hybrid-sexp)
   :init
   (progn
@@ -371,7 +343,6 @@
 ;; Major modes
 
 (use-package js2-mode
-  :ensure t
   :mode ("\\.jsx?\\'" . js2-jsx-mode)
   :config
   (progn
@@ -383,13 +354,11 @@
      '(sgml-basic-offset 4))))
 
 (use-package markdown-mode
-  :ensure t
   :mode (("\\.md$" . markdown-mode)
          ("\\.mkd$" . markdown-mode)
          ("\\.markdown$" . markdown-mode)))
 
 (use-package web-mode
-  :ensure t
   :mode (("\\.phtml\\'" . web-mode)
          ("\\.tpl\\.php\\'" . web-mode)
          ("\\.blade\\.php\\'" . web-mode)
@@ -585,7 +554,6 @@
 
 
 (use-package zenburn-theme
-  :ensure t
   :config (load-theme 'zenburn t))
 
 ;;; init.el ends here
