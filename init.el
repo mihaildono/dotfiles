@@ -82,7 +82,6 @@
    (package-refresh-contents)
    (init-install-packages)))
 
-(setq use-package-always-defer t)
 (setq use-package-always-ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -241,8 +240,6 @@
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
-(use-package use-package-ensure-system-package)
-
 (use-package ivy
   :diminish ivy
   :config (ivy-mode 1))
@@ -283,9 +280,6 @@
   :init (guide-key-mode 1))
 
 (use-package flycheck
-  :ensure-system-package
-  ((pylint . "pip install pylint")
-   (flake8 . "pip install flake8"))
   :config (flycheck-add-next-checker 'python-flake8 'python-pylint)
   :init (global-flycheck-mode +1))
 
