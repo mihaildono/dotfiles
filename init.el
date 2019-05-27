@@ -1,13 +1,54 @@
 ;;; package --- Summary
 ;;; Commentary:
-;;; my config, enjoy :)
+;;; Solenya's config, enjoy :)
 
 ;;; Code:
+
+;;;;;;;;;;;;;;;;;;;
+;; PACKAGE SETUP ;;
+;;;;;;;;;;;;;;;;;;;
+
+(require 'cl)
+(require 'package)
+
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(package-initialize)
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-verbose t)
+(setq use-package-always-ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOM FUNCTIONS ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
+(defun split-and-follow-horizontally ()
+  (interactive)
+  (split-window-below)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+
+(defun split-and-follow-vertically ()
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+
+(defun add-watchwords ()
+  "Change color of some important words."
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIX\\(ME\\)?\\|TODO\\|HACK\\|NOTE\\|REFACTOR\\|NOCOMMIT\\|OPTIMIZE\\)"
+          1 font-lock-warning-face t))))
 
 (defun cleanup-buffer-safe ()
   "Perform a bunch of safe operations on the whitespace content of a buffer.
@@ -50,44 +91,9 @@
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
-
-;;;;;;;;;;;;;;
-;; PACKAGES ;;
-;;;;;;;;;;;;;;
-
-
-(require 'cl)
-(require 'package)
-
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(package-initialize)
-
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
-(defun packages-install (my-packages)
-  (dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p))))
-
-(defun init-install-packages ()
-  (packages-install
-   '(use-package)))
-
-(condition-case nil
-    (init-install-packages)
-  (error
-   (package-refresh-contents)
-   (init-install-packages)))
-
-(setq use-package-always-ensure t)
-
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE SETTINGS ;;
 ;;;;;;;;;;;;;;;;;;;;;;
-
 
 ;; =============================================================================
 ;; Build-in
@@ -98,19 +104,13 @@
 
 (use-package dash)
 
-(use-package dired-x   ;; Load some advanced dired functions.
-  :bind (("C-x C-j"   . dired-jump)))
-
-(use-package uniquify  ;; When several buffers visit identically-named files.
-  :config (setq uniquify-buffer-name-style 'forward))
-
 (use-package saveplace ;; Save point position.
   :config
   (progn (setq-default save-place t)
          (setq save-place-file "~/.emacs.d/places")))
 
 (use-package anzu
-  :diminish anzu-mode
+  :diminish
   :config
   (global-anzu-mode +1))
 
@@ -121,6 +121,7 @@
       (add-hook 'text-mode-hook 'turn-on-flyspell))))
 
 (use-package flyspell
+  :diminish
   :hook (prog-mode-hook . flycheck-mode)
   :config
   (progn
@@ -136,6 +137,7 @@
     (setq org-export-html-postamble nil)))
 
 (use-package dired
+  :ensure nil
   :config
   (progn
     ;; Always delete and copy recursively.
@@ -172,7 +174,8 @@
     (defun dired-start-sxiv ()
       (interactive)
       (shell-command (concat "sxiv -r " "\""
-                             (dired-get-file-for-visit) "\"")))))
+                             (dired-get-file-for-visit) "\""))))
+  :bind (("C-x C-j"   . dired-jump)))
 
 (use-package ruby-mode
   :mode (("\\.rake$" . ruby-mode)
@@ -199,6 +202,23 @@
 
 (use-package diminish)
 
+(use-package switch-window
+  :config
+    (setq switch-window-input-style 'minibuffer)
+    (setq switch-window-increase 4)
+    (setq switch-window-threshold 2)
+    (setq switch-window-shortcut-style 'qwerty)
+    (setq switch-window-qwerty-shortcuts
+        '("a" "s" "d" "f" "j" "k" "l" "i" "o"))
+  :bind
+    ([remap other-window] . switch-window))
+
+(use-package beacon
+  :diminish
+  :config (beacon-mode 1))
+
+(use-package pt)
+
 (use-package dumb-jump
   :config (dumb-jump-mode))
 
@@ -224,12 +244,13 @@
   (tide-hl-identifier-mode +1))
 
 (use-package tide
+  :diminish
   :config
   (add-hook 'js2-mode-hook #'setup-tide-mode)
   (add-hook 'js2-jsx-mode-hook #'setup-tide-mode))
 
 (use-package company
-  :diminish company
+  :diminish
   :config
   (global-company-mode)
   (company-mode +1)
@@ -240,8 +261,10 @@
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
+(use-package use-package-ensure-system-package)
+
 (use-package ivy
-  :diminish ivy
+  :diminish
   :config (ivy-mode 1))
 
 (use-package swiper
@@ -254,6 +277,7 @@
     ("M-x" . counsel-M-x))
 
 (use-package company-jedi
+  :diminish
   :config
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t)
@@ -266,20 +290,22 @@
   :config (exec-path-from-shell-initialize))
 
 (use-package volatile-highlights
-  :diminish volatile-highlights
+  :diminish
   :init (volatile-highlights-mode t))
 
 (use-package golden-ratio
-  :diminish golden-ratio-mode
+  :diminish
   :init (golden-ratio-mode 1))
 
 (use-package guide-key
+  :diminish
   :config (progn (setq guide-key/guide-key-sequence t)
                  (setq guide-key/recursive-key-sequence-flag t)
                  (setq guide-key/popup-window-position 'right))
   :init (guide-key-mode 1))
 
 (use-package flycheck
+  :diminish
   :config (flycheck-add-next-checker 'python-flake8 'python-pylint)
   :init (global-flycheck-mode +1))
 
@@ -298,23 +324,19 @@
 (use-package magit
   :bind (("C-c s" . magit-status)))
 
-(use-package pt)
-
 (use-package projectile
+  :diminish
   :init (projectile-mode)
   :config
   (setq projectile-completion-system 'ivy)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
-(use-package rbenv
-  :config (global-rbenv-mode))
-
 (use-package git-gutter
-  :init (global-git-gutter-mode +1)
-  :diminish git-gutter-mode)
+  :diminish
+  :init (global-git-gutter-mode +1))
 
 (use-package indent-guide
-  :diminish indent-guide-mode
+  :diminish
   :init (indent-guide-mode +1))
 
 (use-package scss-mode
@@ -323,6 +345,7 @@
             (setq css-indent-offset 2)))
 
 (use-package smartparens
+  :diminish
   :bind ("C-K" . sp-kill-hybrid-sexp)
   :init
   (progn
@@ -342,7 +365,7 @@
   (progn
     (define-key js2-mode-map (kbd "M-j") nil)
     (custom-set-variables
-     '(js2-basic-offset 2)
+     '(js2-basic-offset 4)
      '(js2-strict-missing-semi-warning nil)
      '(js2-missing-semi-one-line-override t)
      '(sgml-basic-offset 4))))
@@ -379,10 +402,8 @@
 (use-package python
   :config (define-key inferior-python-mode-map (kbd "C-l") 'eshell/clear))
 
-
 ;; =============================================================================
 ;; Hooks
-
 
 ;; Remove whitespace when saving
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -398,11 +419,9 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
-
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL SETTINGS ;;
 ;;;;;;;;;;;;;;;;;;;;;;
-
 
 ;; Remove all distractions.
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -410,42 +429,31 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-;; Lines should be 80 chars.
-(setq-default fill-column 80)
+(setq-default fill-column 80) ; Lines should be 80 chars.
 
-;; Highlight current line.
-(when window-system (global-hl-line-mode))
+(when window-system (global-hl-line-mode)) ; Highlight current line.
 
-;; Allow pasting selection outside of Emacs.
-(setq x-select-enable-clipboard t)
+(setq x-select-enable-clipboard t) ; Allow pasting selection outside of Emacs.
 
-;; Save selection from external programs in kill ring.
-(setq save-interprogram-paste-before-kill t)
+(setq save-interprogram-paste-before-kill t) ; Save selection from external programs in kill ring.
 
-;; Automatically re-indentation on some commands.
-(electric-indent-mode +1)
+(electric-indent-mode +1) ; Automatically re-indentation on some commands.
 
-;; Delete selection when start writing.
-(delete-selection-mode t)
+(delete-selection-mode t) ; Delete selection when start writing.
 
-;; Auto revert file if it is changed on the disk.
-(global-auto-revert-mode t)
+(global-auto-revert-mode t) ; Auto revert file if it is changed on the disk.
 
-;; Don't use tabs in indentation.
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil) ; Don't use tabs in indentation.
 
-;; Set tabs to be 2 spaces
-(setq tab-width 2)
+(setq tab-width 2) ; Set tabs to be 2 spaces
 
 ;; Set 4 spaces tab stops.
 (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
                       64 68 72 76 80 84 88 92 96 100 104 108 112))
 
-;; Enable y or n answers.
-(defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'yes-or-no-p 'y-or-n-p) ; Enable y or n answers.
 
-;; Increase cache
-(setq gc-cons-threshold 50000000)
+(setq gc-cons-threshold 100000000) ; Increase cache
 
 ;; Always use UTF-8.
 (setq locale-coding-system 'utf-8)
@@ -454,8 +462,7 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; Navigate trough camel cased words.
-(global-subword-mode 1)
+(global-subword-mode 1) ; Navigate trough camel cased words.
 
 (when window-system
   ;; Display help text in the echo area.
@@ -470,55 +477,41 @@
   ;; Prettify frame title.
   (setq frame-title-format '(buffer-file-name "%f" ("%b"))))
 
-;; No start up screen.
-(setq inhibit-startup-message t)
+(setq inhibit-startup-screen t) ; No start up screen.
 
-;; Try to flash the frame to represent a bell instead
-;; of destroying my ears.
-(setq visible-bell t)
+(setq ring-bell-function 'ignore) ; Disable the bell ring
 
-;; Use one color theme for all the frames.
-(setq color-theme-is-global t)
+(setq color-theme-is-global t) ; Use one color theme for all the frames.
 
 ;; White space mode settings.
 (setq whitespace-style '(face trailing lines-tail tabs))
 (setq whitespace-line-column 80)
 (global-whitespace-mode t)
 
-;; Show matching parens.
-(show-paren-mode 1)
+(show-paren-mode 1) ; Show matching parens.
 
-;; Operate on visual lines instead of logical lines.
-(global-visual-line-mode t)
+(global-visual-line-mode t) ; Operate on visual lines instead of logical lines.
 
-;; Show me empty lines after buffer end.
-(set-default 'indicate-empty-lines t)
+(set-default 'indicate-empty-lines t) ; Show me empty lines after buffer end.
 
 ;; Always display file size, line and column numbers.
 (size-indication-mode t)
 (setq line-number-mode t)
 (setq column-number-mode t)
 
-;; Eshell has troubles with more.
-(setenv "PAGER" (executable-find "cat"))
+(setenv "PAGER" (executable-find "cat")) ; Eshell has troubles with more.
 
-;; Use home as the default directory.
-(setq default-directory (getenv "HOME"))
+(setq default-directory (getenv "HOME")) ; Use home as the default directory.
 
-;; Start fullscreen
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . maximized)) ; Start fullscreen
 
-;; Remove initial scratch message
-(setq initial-scratch-message "")
+(setq initial-scratch-message "") ; Remove initial scratch message
 
-;; Add line numbers
-(global-linum-mode 1)
+(global-linum-mode 1) ; Add line numbers
 
 ;; Save all backup files in /backups.
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
                                                "backups"))))
-;; Save current session
-(desktop-save-mode t)
 
 ;; Hippie-expand preferences
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
@@ -532,11 +525,16 @@
                                          try-complete-lisp-symbol-partially
                                          try-complete-lisp-symbol))
 
-;; Fix indentation in js-mode.
-(setq js-indent-level 2)
+(setq js-indent-level 4) ; Fix indentation in js-mode.
 
-;; fix popup menus width
-(setq ac-max-width 0.5)
+(setq ac-max-width 0.5) ; Fix popup menus width
+
+(setq echo-keystrokes 0.1) ; Show faster incomplete commands
+
+;; nice scrolling
+(setq scroll-margin 0)
+(setq scroll-conservatively 100000)
+(setq scroll-preserve-screen-position 1)
 
 (global-set-key (kbd "C-a") 'smarter-move-beginning-of-line)
 (global-set-key (kbd "M-P") 'move-line-up)
