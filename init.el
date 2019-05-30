@@ -177,6 +177,9 @@
                              (dired-get-file-for-visit) "\""))))
   :bind (("C-x C-j"   . dired-jump)))
 
+(use-package robe
+  :config (global-robe-mode))
+
 (use-package ruby-mode
   :mode (("\\.rake$" . ruby-mode)
          ("\\.thor$" . ruby-mode)
@@ -187,7 +190,9 @@
          ("Gemfile$" . ruby-mode)
          ("Capfile$" . ruby-mode)
          ("Vagrantfile$" . ruby-mode))
-  :init (add-hook 'ruby-mode-hook 'rubocop-mode)
+  :init
+  (add-hook 'ruby-mode-hook 'robe-mode)
+  (add-hook 'ruby-mode-hook 'robe-start)
   :config
   (progn
     (setq ruby-insert-encoding-magic-comment nil)
@@ -239,8 +244,6 @@
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
-  (eldoc-mode +1)
-  (company-mode +1)
   (tide-hl-identifier-mode +1))
 
 (use-package tide
@@ -253,7 +256,10 @@
   :diminish
   :config
   (global-company-mode)
+  (add-to-list 'company-backends 'company-jedi)
+  (push 'company-robe company-backends)
   (company-mode +1)
+  (eldoc-mode +1)
   (setq company-idle-delay 0.5)
   (setq company-tooltip-limit 10)
   (setq company-minimum-prefix-length 2)
@@ -281,10 +287,7 @@
   :config
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t)
-  (setq jedi:use-shortcuts t)
-  (defun config/enable-company-jedi ()
-    (add-to-list 'company-backends 'company-jedi))
-  (add-hook 'python-mode-hook 'config/enable-company-jedi))
+  (setq jedi:use-shortcuts t))
 
 (use-package exec-path-from-shell
   :config (exec-path-from-shell-initialize))
@@ -306,7 +309,7 @@
 
 (use-package flycheck
   :diminish
-  :config (flycheck-add-next-checker 'python-flake8 'python-pylint)
+  :config (flycheck-add-next-checker 'python-flake8 'python-pylint 'ruby-rubocop)
   :init (global-flycheck-mode +1))
 
 (use-package expand-region
@@ -543,7 +546,6 @@
 ;;;;;;;;;;;;
 ;; THEMES ;;
 ;;;;;;;;;;;;
-
 
 (use-package zenburn-theme
   :config (load-theme 'zenburn t))
