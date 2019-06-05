@@ -19,18 +19,12 @@ sudo npm install -g tern pure-prompt --allow-root --unsafe-perm=true
 echo "\nInstalling pip packages...\n"
 pip3 install pylint flake8 jedi
 
-echo "\nSetuping linters...\n"
-echo $'"extends": "airbnb"' >> ~/.eslintrc
-
 echo "\nMoving init.el...\n"
 mkdir ~/.emacs.d/
 mv init.el ~/.emacs.d/
 
 echo "\nMoving .zshrc...\n"
-mv .zshrc ~/.zshrc
-
-echo "\nMoving jsconfig.json...\n"
-mv jsconfig.json ~/
+mv .zshrc ~/
 
 echo "\nSetuping jump...\n"
 wget https://github.com/gsamokovarov/jump/releases/download/v0.21.0/jump_0.21.0_amd64.deb
