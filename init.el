@@ -312,6 +312,11 @@
   :config (flycheck-add-next-checker 'python-flake8 'python-pylint 'ruby-rubocop)
   :init (global-flycheck-mode +1))
 
+(custom-set-variables
+ '(flycheck-python-flake8-executable "python3")
+ '(flycheck-python-pycompile-executable "python3")
+ '(flycheck-python-pylint-executable "python3"))
+
 (use-package expand-region
   :bind ("C-;" . er/expand-region))
 
