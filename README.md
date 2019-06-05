@@ -23,4 +23,4 @@ jedi install server
 jedi:start-dedicated-server
 ```
 
-~tested on ubuntu 16+~
+tested on ubuntu 16+
