@@ -5,13 +5,14 @@
 echo "Welcome to Solenya's configation installation script\n"
 sleep 1s
 
-echo "\nPreparing Nodejs...\n"
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+echo "\nInstalling NVM and node...\n"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+nvm install node
 
 echo "\nInstalling packages via apt...\n"
 sudo add-apt-repository ppa:kelleyk/emacs -y
 sudo apt update
-sudo apt install git python-virtualenv terminator zsh gnome-tweak-tool nodejs python3-pip emacs26 libssl-dev libreadline-dev zlib1g-dev -y
+sudo apt install git python-virtualenv terminator zsh gnome-tweak-tool python3-pip emacs26 libssl-dev libreadline-dev zlib1g-dev -y
 
 echo "\nInstalling npm packages...\n"
 sudo npm install -g tern pure-prompt --allow-root --unsafe-perm=true
