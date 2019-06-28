@@ -5,7 +5,7 @@
 echo "Welcome to Solenya's configation installation script\n"
 sleep 1s
 
-echo "\nInstalling node...\n"
+echo "\nInstalling Node...\n"
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 echo "\nInstalling packages via apt...\n"
@@ -44,12 +44,12 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/
 echo "\nInstalling rbenv...\n"
 wget -q https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer -O- | bash
 
-echo "\nInstalling NVM and node...\n"
+echo "\nInstalling NVM...\n"
 mkdir ~/.nvm
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-nvm install node
 
 ## for pure-prompt if symlink is not established, use:
+## cd /usr/lib/node_modules or .nvm/node_ver/node_modules
 ## sudo ln -sf "$PWD/pure.zsh" /usr/local/share/zsh/site-functions/prompt_pure_setup
 ## sudo ln -sf "$PWD/async.zsh" /usr/local/share/zsh/site-functions/async
 

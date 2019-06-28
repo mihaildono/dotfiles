@@ -548,6 +548,13 @@
 (global-set-key (kbd "M-P") 'move-line-up)
 (global-set-key (kbd "M-N") 'move-line-down)
 
+;; Paragraph commands are by far more useful than the sentence commands.
+(global-set-key (kbd "M-e") 'forward-paragraph)
+(global-set-key (kbd "M-a") 'backward-paragraph)
+
+(define-key global-map (kbd "C-+") 'text-scale-increase)
+(define-key global-map (kbd "C--") 'text-scale-decrease)
+
 ;;;;;;;;;;;;
 ;; THEMES ;;
 ;;;;;;;;;;;;

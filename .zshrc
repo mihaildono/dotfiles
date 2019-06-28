@@ -16,11 +16,17 @@ COMPLETION_WAITING_DOTS="true"
 # see 'man strftime' for details.
 HIST_STAMPS="dd.mm.yyyy"
 
+# Match names regardless of capitalization, but try to match exact first
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
 plugins=(
     command-not-found
     zsh-autosuggestions
     last-working-dir
 )
+
+alias ..="cd .."
+alias l="ls -la"
 
 alias gbr="git branch"
 alias g="git"
