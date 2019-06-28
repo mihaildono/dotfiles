@@ -11,6 +11,11 @@ After dot files
 
 
 # Setup
+* Install prerequisites
+``` sh
+$ apt install git curl
+```
+
 * Install dependencies
 ``` sh
 $ sh confish.sh
@@ -19,7 +24,7 @@ $ sh confish.sh
 
 * Run inside Emacs for jedi setup
 ```
-jedi install server
+jedi:install server
 jedi:start-dedicated-server
 ```
 

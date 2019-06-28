@@ -5,14 +5,13 @@
 echo "Welcome to Solenya's configation installation script\n"
 sleep 1s
 
-echo "\nInstalling NVM and node...\n"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-nvm install node
+echo "\nInstalling node...\n"
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 echo "\nInstalling packages via apt...\n"
 sudo add-apt-repository ppa:kelleyk/emacs -y
 sudo apt update
-sudo apt install git python-virtualenv terminator zsh gnome-tweak-tool python3-pip emacs26 libssl-dev libreadline-dev zlib1g-dev -y
+sudo apt install git python-virtualenv terminator zsh nodejs gnome-tweak-tool python3-pip emacs26 libssl-dev libreadline-dev zlib1g-dev -y
 
 echo "\nInstalling npm packages...\n"
 sudo npm install -g tern pure-prompt --allow-root --unsafe-perm=true
@@ -22,10 +21,10 @@ pip3 install pylint flake8 jedi
 
 echo "\nMoving init.el...\n"
 mkdir ~/.emacs.d/
-mv init.el ~/.emacs.d/
+cp init.el ~/.emacs.d/
 
 echo "\nMoving .zshrc...\n"
-mv .zshrc ~/
+cp .zshrc ~/
 
 echo "\nSetuping jump...\n"
 wget https://github.com/gsamokovarov/jump/releases/download/v0.21.0/jump_0.21.0_amd64.deb
@@ -44,5 +43,14 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/
 
 echo "\nInstalling rbenv...\n"
 wget -q https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer -O- | bash
+
+echo "\nInstalling NVM and node...\n"
+mkdir ~/.nvm
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+nvm install node
+
+## for pure-prompt if symlink is not established, use:
+## sudo ln -sf "$PWD/pure.zsh" /usr/local/share/zsh/site-functions/prompt_pure_setup
+## sudo ln -sf "$PWD/async.zsh" /usr/local/share/zsh/site-functions/async
 
 echo "\nHappy Hacking!\n"
