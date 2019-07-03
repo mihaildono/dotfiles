@@ -19,6 +19,14 @@ HIST_STAMPS="dd.mm.yyyy"
 # Match names regardless of capitalization, but try to match exact first
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
+# persist history
+HISTSIZE=50000               #How many lines of history to keep in memory
+HISTFILE=~/.zsh_history     #Where to save history to disk
+SAVEHIST=50000               #Number of history entries to save to disk
+setopt    appendhistory     #Append history to the history file (no overwriting)
+setopt    sharehistory      #Share history across terminals
+setopt    incappendhistory  #Immediately append to the history file, not just when a term is killed
+
 plugins=(
     command-not-found
     zsh-autosuggestions
