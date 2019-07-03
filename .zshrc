@@ -53,6 +53,9 @@ alias grb="git rebase"
 # add jump
 eval "$(jump shell zsh)"
 
+# add bin to path (add additional commands to PATH in ~/bin folder)
+export PATH="/home/$USER/bin:$PATH"
+
 # add autosuggestions plugin
 source ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
