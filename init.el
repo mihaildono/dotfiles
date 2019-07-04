@@ -177,9 +177,6 @@
                              (dired-get-file-for-visit) "\""))))
   :bind (("C-x C-j"   . dired-jump)))
 
-(use-package robe
-  :config (global-robe-mode))
-
 (use-package ruby-mode
   :mode (("\\.rake$" . ruby-mode)
          ("\\.thor$" . ruby-mode)
@@ -190,9 +187,6 @@
          ("Gemfile$" . ruby-mode)
          ("Capfile$" . ruby-mode)
          ("Vagrantfile$" . ruby-mode))
-  :init
-  (add-hook 'ruby-mode-hook 'robe-mode)
-  (add-hook 'ruby-mode-hook 'robe-start)
   :config
   (progn
     (setq ruby-insert-encoding-magic-comment nil)
@@ -241,23 +235,11 @@
 
 (use-package git-timemachine)
 
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (tide-hl-identifier-mode +1))
-
-(use-package tide
-  :diminish
-  :config
-  (add-hook 'js2-mode-hook #'setup-tide-mode)
-  (add-hook 'js2-jsx-mode-hook #'setup-tide-mode))
-
 (use-package company
   :diminish
   :config
   (global-company-mode)
   (add-to-list 'company-backends 'company-jedi)
-  (push 'company-robe company-backends)
   (company-mode +1)
   (eldoc-mode +1)
   (setq company-idle-delay 0.5)
