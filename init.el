@@ -409,6 +409,10 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
+;; add node-modules to path
+(eval-after-load 'js2-mode
+  '(add-hook 'js2-mode-hook #'add-node-modules-path))
+
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL SETTINGS ;;
 ;;;;;;;;;;;;;;;;;;;;;;
