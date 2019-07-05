@@ -201,6 +201,8 @@
 
 (use-package diminish)
 
+(use-package rjsx-mode)
+
 (use-package switch-window
   :config
     (setq switch-window-input-style 'minibuffer)
@@ -547,6 +549,8 @@
 
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
+
+(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
 ;;;;;;;;;;;;
 ;; THEMES ;;
