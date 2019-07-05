@@ -201,6 +201,9 @@
 
 (use-package diminish)
 
+(use-package haml-mode
+  :mode ("\\.haml$" . haml-mode)
+
 (use-package rjsx-mode)
 
 (use-package switch-window
