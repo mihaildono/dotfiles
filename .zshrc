@@ -36,6 +36,8 @@ plugins=(
 alias ..="cd .."
 alias l="ls -la"
 
+alias rake="noglob rake"
+
 alias gbr="git branch"
 alias g="git"
 alias gs="git status -s"
