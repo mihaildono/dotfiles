@@ -28,4 +28,11 @@ jedi:install server
 jedi:start-dedicated-server
 ```
 
+* Add tldr to bin (bin may be created beforehand by pt)
+```
+mkdir -p ~/bin
+curl -o ~/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr
+chmod +x ~/bin/tldr
+```
+
 tested on ubuntu 16+
