@@ -109,11 +109,6 @@
   (progn (setq-default save-place t)
          (setq save-place-file "~/.emacs.d/places")))
 
-(use-package anzu
-  :diminish
-  :config
-  (global-anzu-mode +1))
-
 (use-package ispell
   :config
   (progn
@@ -209,15 +204,22 @@
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
 
 (use-package haml-mode
-  :mode ("\\.haml$" . haml-mode)
+  :mode ("\\.haml$" . haml-mode))
 
-(use-package rjsx-mode)
+(use-package rjsx-mode
+  :mode (("\\.js\\'" . rjsx-mode)
+         ("\\.jsx\\'" . rjsx-mode))
+  :config
+  (progn
+    (custom-set-variables
+     '(js2-basic-offset 2)
+     '(sgml-basic-offset 2))))
 
 (use-package switch-window
   :config
     (setq switch-window-input-style 'minibuffer)
     (setq switch-window-increase 4)
-    (setq switch-window-threshold 2)
+    (setq switch-window-threshold 3)
     (setq switch-window-shortcut-style 'qwerty)
     (setq switch-window-qwerty-shortcuts
         '("a" "s" "d" "f" "j" "k" "l" "i" "o"))
@@ -303,22 +305,10 @@
 
 (use-package flycheck
   :diminish
-  :config (flycheck-add-next-checker 'python-flake8 'python-pylint 'ruby-rubocop)
+  :config (progn
+            (add-to-list 'flycheck-checkers 'ruby-rubocop 'javascript-eslint)
+            (flycheck-add-next-checker 'python-flake8 'python-pylint))
   :init (global-flycheck-mode +1))
-
-(custom-set-variables
- '(flycheck-python-flake8-executable "python3")
- '(flycheck-python-pycompile-executable "python3")
- '(flycheck-python-pylint-executable "python3"))
-
-(use-package expand-region
-  :bind ("C-;" . er/expand-region))
-
-(use-package ace-jump-mode
-  :bind (("C-c SPC"   . ace-jump-char-mode)))
-
-(use-package ace-jump-buffer
-  :bind ("C-c C-SPC" . ace-jump-buffer))
 
 (use-package browse-kill-ring
   :bind (("M-y" . browse-kill-ring)))
@@ -361,17 +351,6 @@
 ;; -----------------------------------------------------------------------------
 ;; Major modes
 
-(use-package js2-mode
-  :mode ("\\.jsx?\\'" . js2-jsx-mode)
-  :config
-  (progn
-    (define-key js2-mode-map (kbd "M-j") nil)
-    (custom-set-variables
-     '(js2-basic-offset 4)
-     '(js2-strict-missing-semi-warning nil)
-     '(js2-missing-semi-one-line-override t)
-     '(sgml-basic-offset 4))))
-
 (use-package markdown-mode
   :mode (("\\.md$" . markdown-mode)
          ("\\.mkd$" . markdown-mode)
@@ -408,13 +387,6 @@
 ;; Hooks
 
 ;; Remove whitespace when saving
-
-(add-hook 'js2-mode-hook
-          (defun my-js2-mode-setup ()
-            (flycheck-mode t)
-            (when (executable-find "eslint")
-              (flycheck-select-checker 'javascript-eslint))))
-
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (add-hook 'prog-mode-hook 'indent-guide-mode)
@@ -427,10 +399,6 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
-
-;; add node-modules to path
-(eval-after-load 'js2-mode
-  '(add-hook 'js2-mode-hook #'add-node-modules-path))
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL SETTINGS ;;
@@ -538,8 +506,6 @@
                                          try-complete-lisp-symbol-partially
                                          try-complete-lisp-symbol))
 
-(setq js-indent-level 4) ; Fix indentation in js-mode.
-
 (setq ac-max-width 0.5) ; Fix popup menus width
 
 (setq echo-keystrokes 0.1) ; Show faster incomplete commands
@@ -559,8 +525,6 @@
 
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
-
-(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
 ;;;;;;;;;;;;
 ;; THEMES ;;
