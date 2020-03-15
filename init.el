@@ -213,7 +213,8 @@
   (progn
     (custom-set-variables
      '(js2-basic-offset 2)
-     '(sgml-basic-offset 2))))
+     '(sgml-basic-offset 2)
+     '(js2-strict-missing-semi-warning nil))))
 
 (use-package switch-window
   :config
@@ -525,6 +526,10 @@
 
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
+
+(eval-after-load 'js2-mode
+  '(add-hook 'js2-mode-hook #'add-node-modules-path))
+
 
 ;;;;;;;;;;;;
 ;; THEMES ;;
