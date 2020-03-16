@@ -36,3 +36,5 @@ chmod +x ~/bin/tldr
 ```
 
 tested on ubuntu 16+
+
+TODO: maybe consider removing pure promp and substitute terminator for terminus
