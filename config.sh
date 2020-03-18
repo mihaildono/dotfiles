@@ -47,11 +47,6 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 nvm install node
 
 echo "\nInstalling npm packages...\n"
-sudo npm install -g tern pure-prompt --allow-root --unsafe-perm=true
-
-## for pure-prompt if symlink is not established, use:
-## cd /usr/lib/node_modules or .nvm/node_ver/node_modules
-## sudo ln -sf "$PWD/pure.zsh" /usr/local/share/zsh/site-functions/prompt_pure_setup
-## sudo ln -sf "$PWD/async.zsh" /usr/local/share/zsh/site-functions/async
+sudo npm install -g spaceship-prompt # --allow-root --unsafe-perm=true
 
 echo "\nHappy Hacking!\n"

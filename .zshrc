@@ -62,12 +62,10 @@ export PATH="/home/$USER/bin:$PATH"
 source ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
 
-# init pure prompt
-autoload -U promptinit; promptinit
-prompt pure
-
 # add ruby rbenv path vars
 export PATH="$HOME/.rbenv/bin:$PATH"
+PATH=$PATH:/usr/lib/postgresql/10/bin
+export PATH
 eval "$(rbenv init -)"
 
 # nvm initialization
@@ -97,3 +95,8 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+fpath=($fpath "/home/mihail/.zfunctions")
+
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
