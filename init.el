@@ -12,7 +12,7 @@
 (require 'package)
 
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
 (package-initialize)
 
@@ -254,7 +254,7 @@
   :diminish
   :config
   (global-company-mode)
-  (add-to-list 'company-backends 'company-jedi)
+  (add-to-list 'company-backends 'company-jedi 'company-tern)
   (company-mode +1)
   (eldoc-mode +1)
   (setq company-idle-delay 0.5)
@@ -278,6 +278,15 @@
 (use-package counsel
   :bind
     ("M-x" . counsel-M-x))
+
+(use-package tern
+  :config
+  (add-hook 'rjsx-mode-hook 'tern-mode)
+  (add-hook 'web-mode-hook 'tern-mode))
+
+(use-package company-tern
+  :init (add-to-list 'company-backends 'company-tern)
+  :config (setq company-tern-property-marker nil))
 
 (use-package company-jedi
   :diminish
@@ -529,6 +538,20 @@
 
 (eval-after-load 'js2-mode
   '(add-hook 'js2-mode-hook #'add-node-modules-path))
+
+;; backup files directory
+(setq backup-directory-alist `((".*" . "~/.emacs-saves/")))
+(setq auto-save-file-name-transforms
+      `((".*" "~/.emacs-saves/" t)))
+
+;; backup by copy, delete if slow
+(setq backup-by-copying t)
+
+;; more backup files
+(setq delete-old-versions t
+  kept-new-versions 6
+  kept-old-versions 2
+  version-control t)
 
 
 ;;;;;;;;;;;;
