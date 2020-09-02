@@ -172,27 +172,25 @@
                              (dired-get-file-for-visit) "\""))))
   :bind (("C-x C-j"   . dired-jump)))
 
-(use-package ruby-mode
-  :mode (("\\.rake$" . ruby-mode)
-         ("\\.thor$" . ruby-mode)
-         ("\\.gemspec$" . ruby-mode)
-         ("\\.ru$" . ruby-mode)
-         ("Rakefile$" . ruby-mode)
-         ("Thorfile$" . ruby-mode)
-         ("Gemfile$" . ruby-mode)
-         ("Capfile$" . ruby-mode)
-         ("Vagrantfile$" . ruby-mode))
-  :config
-  (progn
-    (setq ruby-insert-encoding-magic-comment nil)
-    (setq ruby-indent-level 2)
-    (setq ruby-deep-indent-paren nil)))
-
 ;; =============================================================================
 ;; External
 
 ;; -----------------------------------------------------------------------------
 ;; Utilities
+
+;; This package makes other packages work
+(use-package exec-path-from-shell
+  :config (exec-path-from-shell-initialize))
+
+(use-package add-node-modules-path)
+(eval-after-load 'rjsx-mode
+  '(add-hook 'rjsx-mode-hook #'add-node-modules-path))
+
+(use-package eglot
+  :commands (eglot eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs '(rjsx-mode . ("typescript-language-server" "--stdio"))))
+(add-hook 'rjsx-mode-hook 'eglot-ensure)
 
 (use-package diminish)
 
@@ -202,9 +200,6 @@
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
-
-(use-package haml-mode
-  :mode ("\\.haml$" . haml-mode))
 
 (use-package rjsx-mode
   :mode (("\\.js\\'" . rjsx-mode)
@@ -245,9 +240,6 @@
 (use-package idle-highlight-mode
   :config (add-hook 'prog-mode-hook '(lambda () (idle-highlight-mode t))))
 
-(use-package anaconda-mode
-  :hook python-mode-hook)
-
 (use-package git-timemachine)
 
 (use-package company
@@ -278,29 +270,6 @@
 (use-package counsel
   :bind
     ("M-x" . counsel-M-x))
-
-(use-package tern
-  :config
-  (add-hook 'rjsx-mode-hook 'tern-mode)
-  (add-hook 'web-mode-hook 'tern-mode))
-
-(use-package company-tern
-  :init (add-to-list 'company-backends 'company-tern)
-  :config (setq company-tern-property-marker nil))
-
-(use-package company-jedi
-  :diminish
-  :config
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (setq jedi:complete-on-dot t)
-  (setq jedi:use-shortcuts t))
-
-(use-package exec-path-from-shell
-  :config (exec-path-from-shell-initialize))
-
-(use-package volatile-highlights
-  :diminish
-  :init (volatile-highlights-mode t))
 
 (use-package golden-ratio
   :diminish
@@ -389,9 +358,6 @@
                  (setq web-mode-disable-autocompletion t)
 
                  (local-set-key (kbd "RET") 'newline-and-indent)))))
-
-(use-package python
-  :config (define-key inferior-python-mode-map (kbd "C-l") 'eshell/clear))
 
 ;; =============================================================================
 ;; Hooks
@@ -552,8 +518,6 @@
   kept-new-versions 6
   kept-old-versions 2
   version-control t)
-
-
 ;;;;;;;;;;;;
 ;; THEMES ;;
 ;;;;;;;;;;;;
