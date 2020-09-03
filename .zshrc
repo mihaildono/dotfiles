@@ -36,8 +36,6 @@ plugins=(
 alias ..="cd .."
 alias l="ls -la"
 
-alias rake="noglob rake"
-
 alias gbr="git branch"
 alias g="git"
 alias gs="git status -s"
@@ -61,12 +59,6 @@ export PATH="/home/$USER/bin:$PATH"
 # add autosuggestions plugin
 source ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
-
-# add ruby rbenv path vars
-export PATH="$HOME/.rbenv/bin:$PATH"
-PATH=$PATH:/usr/lib/postgresql/10/bin
-export PATH
-eval "$(rbenv init -)"
 
 # nvm initialization
 export NVM_DIR="$HOME/.nvm"

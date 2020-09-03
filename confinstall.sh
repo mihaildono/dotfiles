@@ -1,14 +1,14 @@
 #!bin/sh
 #
-# Automates initial config of Solenya's files.
+# Automates initial config of MihailDono's files.
 
-echo "Welcome to Solenya's configation installation script\n"
+echo "Welcome to MihailDono's configation installation script\n"
 sleep 1s
 
 echo "\nInstalling packages via apt...\n"
 sudo add-apt-repository ppa:kelleyk/emacs -y
 sudo apt update
-sudo apt install git terminator zsh emacs26 libssl-dev libreadline-dev zlib1g-dev typescript-language-server -y
+sudo apt install git terminator zsh emacs26 libssl-dev libreadline-dev zlib1g-dev -y
 
 echo "\nMoving init.el...\n"
 mkdir ~/.emacs.d/
@@ -22,14 +22,14 @@ wget https://github.com/gsamokovarov/jump/releases/download/v0.30.1/jump_0.30.1_
 sudo dpkg -i jump_0.30.1_amd64.deb
 
 echo "\nSetuping terminal...\n"
-chsh -s $(which zsh)
-wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
+
+wget -O zshinstall.sh https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
 # Prevent the script from stopping.
-sed -i.tmp 's:env zsh::g' install.sh
-sed -i.tmp 's:chsh -s .*$::g' install.sh
-sed '111d' install.sh
-chmod +x install.sh
-./install.sh
+sed -i.tmp 's:::g' zshinstall.sh
+sed -i.tmp 's:
+sed '111d' zshinstall.sh
+chmod +x zshinstall.sh
+./zshinstall.sh
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
 
 echo "\nInstalling NVM and node...\n"
@@ -38,6 +38,6 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 nvm install node
 
 echo "\nInstalling npm packages...\n"
-npm install -g spaceship-prompt # --allow-root --unsafe-perm=true
+npm install -g spaceship-prompt typescript-language-server # --allow-root --unsafe-perm=true
 
 echo "\nHappy Hacking!\n"

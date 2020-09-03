@@ -11,8 +11,7 @@ After dot files
 
 
 # Setup
-* Install dependencies
+* To setup config run
 ``` sh
-$ sh install.sh
+$ sh confinstall.sh
 ```
-* * Remap caps lock to ctrl
