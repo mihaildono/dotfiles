@@ -55,6 +55,7 @@
 (require 'init-themes)
 (require 'init-windows)
 (require 'init-settings)
+(require 'init-modeline)
 
 (provide 'init)
 

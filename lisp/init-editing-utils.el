@@ -61,6 +61,7 @@
 (require-package 'smartparens)
 (require 'smartparens-config)
 (add-hook 'text-mode-hook 'smartparens-mode)
+(add-hook 'prog-mode-hook 'smartparens-mode)
 ;; replace matching parens
 (global-set-key (kbd "C-c C-r") 'sp-rewrap-sexp)
 
@@ -108,7 +109,7 @@
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 ;; enable Flyspell mode
-(dolist (hook '(prog-mode-hook))
+(dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 
 ;; show git change lines

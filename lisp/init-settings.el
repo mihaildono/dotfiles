@@ -2,13 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Handle the prompt pattern for the 1password command-line interface
-(with-eval-after-load 'comint
-  (setq comint-password-prompt-regexp
-        (concat
-         comint-password-prompt-regexp
-         "\\|^Please enter your password for user .*?:\\s *\\'")))
-
 ;; General settings
 (fset 'yes-or-no-p 'y-or-n-p)
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
