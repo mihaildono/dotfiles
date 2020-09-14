@@ -60,7 +60,7 @@
 
 (require-package 'smartparens)
 (require 'smartparens-config)
-(add-hook 'prog-mode-hook 'smartparens-mode)
+(add-hook 'text-mode-hook 'smartparens-mode)
 ;; replace matching parens
 (global-set-key (kbd "C-c C-r") 'sp-rewrap-sexp)
 
