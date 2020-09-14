@@ -10,8 +10,9 @@ After dot files
 ![alt tag](https://cloud.githubusercontent.com/assets/15171105/19050494/8194e5ee-89b7-11e6-9d75-afd1652e3130.jpg)
 
 
-# Setup
-* To install config run
+# Installation
 ``` sh
+$ git clone https://github.com/mihaildono/dotfiles.git ~/.emacs.d
+$ cd ~/.emacs.d/
 $ sh config/install.sh
 ```
