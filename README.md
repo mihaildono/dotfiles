@@ -11,7 +11,7 @@ After dot files
 
 
 # Setup
-* To setup config run
+* To install config run
 ``` sh
-$ sh confinstall.sh
+$ sh config/install.sh
 ```
