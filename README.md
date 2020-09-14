@@ -12,5 +12,5 @@ After dot files
 
 # Installation
 ``` sh
-$ git clone https://github.com/mihaildono/dotfiles.git ~/.emacs.d && sh ~/.emacs.d/config/install.sh
+$ git clone git@github.com:mihaildono/dotfiles.git && sh ~/.emacs.d/config/install.sh
 ```
