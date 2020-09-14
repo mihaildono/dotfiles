@@ -27,7 +27,7 @@ echo "\nSetuping terminal...\n"
 wget -O zshinstall.sh https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
 # Prevent the script from stopping.
 sed -i.tmp 's:::g' zshinstall.sh
-sed -i.tmp 's:
+sed -i.tmp 's:'
 sed '111d' zshinstall.sh
 chmod +x zshinstall.sh
 ./zshinstall.sh
