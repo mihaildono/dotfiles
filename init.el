@@ -28,10 +28,7 @@
 ;; Calls (package-initialize)
 (require 'init-elpa)      ;; Machinery for installing required packages
 
-;; setup $PATH
-(require-package 'exec-path-from-shell)
-(exec-path-from-shell-initialize)
-
+(require 'init-path)
 ;;----------------------------------------------------------------------------
 ;; Packages
 ;;----------------------------------------------------------------------------

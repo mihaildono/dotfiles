@@ -4,6 +4,9 @@
 
 (define-obsolete-function-alias 'after-load 'with-eval-after-load "")
 
+;; suppress warnings
+(setq ad-redefinition-action 'accept)
+
 ;;----------------------------------------------------------------------------
 ;; Handier way to add modes to auto-mode-alist
 ;;----------------------------------------------------------------------------
