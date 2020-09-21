@@ -13,18 +13,9 @@
                   ivy-dynamic-exhibit-delay-ms 150
                   ivy-use-selectable-prompt t)
 
-    ;; IDO-style directory navigation
-    (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-    (dolist (k '("C-j" "C-RET"))
-      (define-key ivy-minibuffer-map (kbd k) #'ivy-immediate-done))
+    (define-key ivy-occur-mode-map (kbd "C-c C-q") #'ivy-wgrep-change-to-wgrep-mode))
 
-    (define-key ivy-minibuffer-map (kbd "<up>") #'ivy-previous-line-or-history)
-    (define-key ivy-minibuffer-map (kbd "<down>") #'ivy-next-line-or-history)
-
-    (define-key ivy-occur-mode-map (kbd "C-c C-q") #'ivy-wgrep-change-to-wgrep-mode)
-
-    (when (maybe-require-package 'diminish)
-      (diminish 'ivy-mode)))
+  ;; adds
   (when (maybe-require-package 'ivy-rich)
     (setq ivy-virtual-abbreviate 'abbreviate
           ivy-rich-switch-buffer-align-virtual-buffer nil
@@ -76,10 +67,6 @@ instead."
   (with-eval-after-load 'ivy
     (define-key ivy-mode-map [remap isearch-forward]  'swiper)
     (define-key ivy-mode-map [remap isearch-backward] 'swiper)))
-
-(when (maybe-require-package 'ivy-xref)
-  (setq xref-show-xrefs-function 'ivy-xref-show-xrefs))
-
 
 (provide 'init-ivy)
 ;;; init-ivy.el ends here

@@ -6,9 +6,7 @@ echo "Powering up systems...\n"
 sleep 1s
 
 echo "\nInstalling packages via apt...\n"
-sudo add-apt-repository ppa:kelleyk/emacs -y
-sudo apt update
-sudo apt install git terminator zsh emacs26 libssl-dev libreadline-dev zlib1g-dev silversearcher-ag -y
+sudo apt install git terminator zsh silversearcher-ag -y
 
 echo "\nMoving init.el...\n"
 mkdir ~/.emacs.d/
@@ -41,5 +39,8 @@ nvm install node
 
 echo "\nInstalling npm packages...\n"
 npm install -g spaceship-prompt typescript typescript-language-server # --allow-root --unsafe-perm=true
+
+echo "\nInstalling emacs27...\n"
+snap install emacs --classic
 
 echo "\nHappy Hacking!\n"
