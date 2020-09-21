@@ -3,7 +3,7 @@
 ;;; Code:
 
 (require-package 'exec-path-from-shell)
-;; supress init message
+;; suppress init message
 (setq exec-path-from-shell-check-startup-files nil)
 (exec-path-from-shell-initialize)
 
