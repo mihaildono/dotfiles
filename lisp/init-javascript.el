@@ -5,8 +5,15 @@
 (maybe-require-package 'js2-mode)
 
 (add-hook 'js-mode-hook 'js2-minor-mode)
+
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 
+;; add close tag from sgml-mode
+(autoload 'sgml-close-tag
+  "sgml-mode" "Close html tags" t)
+(global-set-key (kbd "C-c /") 'sgml-close-tag)
+
+;; set indent level to 2
 (setq js-indent-level 2)
 
 (when (maybe-require-package 'add-node-modules-path)
