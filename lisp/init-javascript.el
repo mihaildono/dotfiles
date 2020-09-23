@@ -8,6 +8,11 @@
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 
+;; add delete tag from sgml-mode
+(autoload 'sgml-delete-tag
+  "sgml-mode" "Delete html tags" t)
+(global-set-key (kbd "C-c DEL") 'sgml-delete-tag)
+
 ;; add close tag from sgml-mode
 (autoload 'sgml-close-tag
   "sgml-mode" "Close html tags" t)
