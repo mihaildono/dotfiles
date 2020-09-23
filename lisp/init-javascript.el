@@ -6,6 +6,10 @@
 
 (add-hook 'js-mode-hook 'js2-minor-mode)
 
+(autoload 'sgml-electric-tag-pair-mode
+  "sgml-mode" "Auto edits html tags" t)
+(add-hook 'js-mode-hook 'sgml-electric-tag-pair-mode)
+
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 
 ;; add delete tag from sgml-mode

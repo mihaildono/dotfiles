@@ -30,9 +30,7 @@
     (setq-default ivy-initial-inputs-alist
                   '((Man-completion-table . "^")
                     (woman . "^"))))
-  (when (maybe-require-package 'diminish)
-    (with-eval-after-load 'counsel
-      (diminish 'counsel-mode)))
+
   (add-hook 'after-init-hook 'counsel-mode)
 
   (when (maybe-require-package 'projectile)
