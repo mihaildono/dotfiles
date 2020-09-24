@@ -7,6 +7,13 @@
   ;; display error messages in the echo area
   (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list))
 
+;; config file
+;; (custom-set-variables
+;;  '(flycheck-typescript-tslint-config "~/tslint.json"))
+
+;; user-created-config
+;; (custom-set-variables)
+;; '(flycheck-typescript-tslint-rulesdir "~/tslint.json")
 
 (provide 'init-flycheck)
 ;;; init-flycheck.el ends here

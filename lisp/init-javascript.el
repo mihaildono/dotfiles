@@ -30,7 +30,7 @@
 
 
 (when (maybe-require-package 'add-node-modules-path)
-  (dolist (mode '(js-mode js2-mode))
+  (dolist (mode '(js-mode js2-mode typescript-mode))
     (add-hook (derived-mode-hook-name mode) 'add-node-modules-path)))
 
 (provide 'init-javascript)
