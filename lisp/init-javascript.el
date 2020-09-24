@@ -6,11 +6,11 @@
 
 (add-hook 'js-mode-hook 'js2-minor-mode)
 
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
+
 (autoload 'sgml-electric-tag-pair-mode
   "sgml-mode" "Auto edits html tags" t)
 (add-hook 'js-mode-hook 'sgml-electric-tag-pair-mode)
-
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 
 ;; add delete tag from sgml-mode
 (autoload 'sgml-delete-tag
@@ -21,6 +21,8 @@
 (autoload 'sgml-close-tag
   "sgml-mode" "Close html tags" t)
 (global-set-key (kbd "C-c /") 'sgml-close-tag)
+
+(setq js2-strict-missing-semi-warning nil)
 
 ;; set indent level to 2
 (setq js-indent-level 2)
