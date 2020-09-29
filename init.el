@@ -54,6 +54,9 @@
 (require 'init-settings)
 (require 'init-modeline)
 
+(maybe-require-package 'graphql-mode)
+(maybe-require-package 'yaml-mode)
+
 (provide 'init)
 
 ;; coding: utf-8

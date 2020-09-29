@@ -38,7 +38,7 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 nvm install node
 
 echo "\nInstalling npm packages...\n"
-npm install -g spaceship-prompt typescript typescript-language-server # --allow-root --unsafe-perm=true
+npm install -g typescript typescript-language-server spaceship-prompt  # --allow-root --unsafe-perm=true
 
 echo "\nInstalling emacs27...\n"
 snap install emacs --classic
