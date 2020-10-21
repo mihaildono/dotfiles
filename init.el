@@ -47,6 +47,7 @@
 (require 'init-web)
 (require 'init-css)
 (require 'init-markdown)
+(require 'init-org)
 
 (require 'init-editing-utils)
 (require 'init-themes)
