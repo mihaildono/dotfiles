@@ -54,6 +54,7 @@
 (require 'init-windows)
 (require 'init-settings)
 (require 'init-modeline)
+(require 'init-dashboard)
 
 (maybe-require-package 'graphql-mode)
 (maybe-require-package 'yaml-mode)
