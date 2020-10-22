@@ -34,8 +34,5 @@
       org-tags-column 80
       org-directory "~/.emacs.d/org")
 
-;;; Archiving
-(setq org-archive-location "%s_archive::* Archive")
-
 (provide 'init-org)
 ;;; init-org.el ends here
