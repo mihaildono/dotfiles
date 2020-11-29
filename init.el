@@ -55,6 +55,7 @@
 (require 'init-settings)
 (require 'init-modeline)
 (require 'init-dashboard)
+(require 'init-tide)
 
 (maybe-require-package 'graphql-mode)
 (maybe-require-package 'yaml-mode)
