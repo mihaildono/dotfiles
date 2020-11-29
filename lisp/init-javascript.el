@@ -3,12 +3,22 @@
 ;;; Code:
 
 (maybe-require-package 'js2-mode)
-(maybe-require-package 'typescript-mode)
 
 (add-hook 'js-mode-hook 'js2-minor-mode)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx?\\'" . web-mode))
+
+(setq web-mode-markup-indent-offset 2)
+
+;; Remove double quotes after the character = in a tag.
+(setq web-mode-enable-auto-quoting nil)
+
+;; highlight closing tag
+(setq web-mode-enable-current-element-highlight t)
+
+;; close tag on typing '</'
+(setq sgml-quick-keys 'close)
 
 (autoload 'sgml-electric-tag-pair-mode
   "sgml-mode" "Auto edits html tags" t)
@@ -26,11 +36,9 @@
 
 (setq js2-strict-missing-semi-warning nil)
 (setq js-indent-level 2)
-(setq typescript-indent-level 2)
-
 
 (when (maybe-require-package 'add-node-modules-path)
-  (dolist (mode '(js-mode js2-mode typescript-mode))
+  (dolist (mode '(js-mode js2-mode web-mode))
     (add-hook (derived-mode-hook-name mode) 'add-node-modules-path)))
 
 (provide 'init-javascript)
