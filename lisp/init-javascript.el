@@ -9,8 +9,11 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . web-mode))
 
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-code-indent-offset 2)
+(setq web-mode-markup-indent-offset 4)
+(setq web-mode-code-indent-offset 4)
+
+;; Remove double quotes after the character = in a tag.
+(setq web-mode-enable-auto-indentation nil)
 
 ;; Remove double quotes after the character = in a tag.
 (setq web-mode-enable-auto-quoting nil)

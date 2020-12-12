@@ -55,3 +55,4 @@ site-lisp/package/
 /.lsp-session-v1
 /smex-items
 /org
+/xkcd
