@@ -6,7 +6,7 @@ echo "Powering up systems...\n"
 sleep 1s
 
 echo "\nInstalling packages via apt...\n"
-sudo apt install git terminator zsh silversearcher-ag -y
+sudo apt install git terminator zsh silversearcher-ag markdown -y
 
 echo "\nMoving init.el...\n"
 mkdir ~/.emacs.d/
