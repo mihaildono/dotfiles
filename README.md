@@ -17,5 +17,5 @@ $ git clone git@github.com:mihaildono/dotfiles.git ~/.emacs
 ```
 For Linux use auto-installer:
 ```
-sh ~/.emacs.d/config/install.sh
+$ sh ~/.emacs.d/config/install.sh
 ```
