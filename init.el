@@ -26,7 +26,8 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (require 'init-utils)
 ;; Calls (package-initialize)
-(require 'init-elpa)      ;; Machinery for installing required packages
+;; Machinery for installing required packages
+(require 'init-elpa)
 
 (require 'init-path)
 ;;----------------------------------------------------------------------------

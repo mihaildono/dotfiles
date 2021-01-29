@@ -18,7 +18,7 @@
                         (agenda . 5)))
 
 ;; show latest xkcd comic
-(require 'xkcd)
+(require-package 'xkcd)
 
 ;; to update cached xkcd
 (with-temp-buffer

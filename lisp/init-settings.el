@@ -8,8 +8,11 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
+(setq mac-command-modifier 'meta)
+
 ;; Highlight current line.
 (when window-system (global-hl-line-mode))
+
 ;; Remove initial scratch message
 (setq initial-scratch-message "")
 
