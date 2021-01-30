@@ -61,7 +61,8 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3" # change color of suggestion
 
 # add bin to path (add additional commands to PATH in ~/bin folder)
 # export PATH="/home/$USER/bin:$PATH"
-# export PATH="/usr/local/sbin:$PATH"
+# This is for MacOS
+export PATH="/usr/local/sbin:$PATH"
 
 # Custom
 # Match names regardless of capitalization, but try to match exact first
