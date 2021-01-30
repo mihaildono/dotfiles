@@ -1,41 +1,23 @@
-# important variable for OMZ
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Theme
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Variables
 export ZSH="$HOME/.oh-my-zsh"
+export TERM="xterm-256color" # This sets up colors properly
 
-# this is overriden by pure prompt
-ZSH_THEME="robbyrussell"
-fpath=( "$HOME/.zfunctions" $fpath )
-
-# Display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-HIST_STAMPS="dd.mm.yyyy"
-
-# Match names regardless of capitalization, but try to match exact first
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-
-# persist history
-HISTSIZE=50000               #How many lines of history to keep in memory
-HISTFILE=~/.zsh_history     #Where to save history to disk
-SAVEHIST=50000               #Number of history entries to save to disk
-setopt    appendhistory     #Append history to the history file (no overwriting)
-setopt    sharehistory      #Share history across terminals
-setopt    incappendhistory  #Immediately append to the history file, not just when a term is killed
-
-plugins=(
-    command-not-found
-    zsh-autosuggestions
-    last-working-dir
-)
-
+# Aliases
+# directory
 alias ..="cd .."
 alias l="ls -la"
 
+# git
 alias gbr="git branch"
 alias g="git"
 alias gs="git status -s"
@@ -50,15 +32,40 @@ alias gl="git log --pretty=format:'%C(yellow)%h %Cred%ar %Cblue%an%Cgreen%d %Cre
 alias grbi="git rebase -i"
 alias grb="git rebase"
 
-# add jump
-eval "$(jump shell zsh)"
+# General settings
+COMPLETION_WAITING_DOTS="true"     # Display red dots whilst waiting for completion.
+DISABLE_MAGIC_FUNCTIONS="true"     # No auto insert backslashes
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1    # Performance boost
+HIST_STAMPS="%d/%m/%y %T"          # Show date of command
+DISABLE_UNTRACKED_FILES_DIRTY=true # Not show untracked files
+
+# persist history
+HISTSIZE=50000              # How many lines of history to keep in memory
+HISTFILESIZE=50000              # How many lines of history to keep in memory
+HISTFILE=~/.zsh_history     # Where to save history to disk
+SAVEHIST=50000              # Number of history entries to save to disk
+setopt appendhistory        # Append history to the history file (no overwriting)
+setopt sharehistory         # Share history across terminals
+setopt incappendhistory     # Immediately append to the history file, not just when a term is killed
+
+plugins=(
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    autojump
+    last-working-dir
+    command-not-found
+)
+
+# Plugin settings
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3" # change color of suggestion
 
 # add bin to path (add additional commands to PATH in ~/bin folder)
-export PATH="/home/$USER/bin:$PATH"
+# export PATH="/home/$USER/bin:$PATH"
+# export PATH="/usr/local/sbin:$PATH"
 
-# add autosuggestions plugin
-source ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
+# Custom
+# Match names regardless of capitalization, but try to match exact first
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 # nvm initialization
 export NVM_DIR="$HOME/.nvm"
@@ -87,8 +94,10 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
-fpath=($fpath "/home/mihail/.zfunctions")
+fpath=($fpath "$HOME/.zfunctions")
 
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
+# Bottom line settings
+source $ZSH/oh-my-zsh.sh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
