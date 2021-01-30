@@ -130,6 +130,10 @@
 (global-set-key (kbd "C-c m e") 'mc/edit-ends-of-lines)
 (global-set-key (kbd "C-c m a") 'mc/edit-beginnings-of-lines)
 
+;; Paragraph commands are by far more useful than the senctence commands.
+(global-set-key (kbd "M-e") 'forward-paragraph)
+(global-set-key (kbd "M-a") 'backward-paragraph)
+
 (defun sanityinc/open-line-with-reindent (n)
   "A version of `open-line' which reindents the start and end positions.
 If there is a fill prefix and/or a `left-margin', insert them
