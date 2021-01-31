@@ -41,7 +41,6 @@ DISABLE_UNTRACKED_FILES_DIRTY=true # Not show untracked files
 
 # persist history
 HISTSIZE=50000              # How many lines of history to keep in memory
-HISTFILESIZE=50000              # How many lines of history to keep in memory
 HISTFILE=~/.zsh_history     # Where to save history to disk
 SAVEHIST=50000              # Number of history entries to save to disk
 setopt appendhistory        # Append history to the history file (no overwriting)
@@ -54,10 +53,13 @@ plugins=(
     autojump
     last-working-dir
     command-not-found
+    zsh-nvm
 )
 
 # Plugin settings
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3" # change color of suggestion
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
 
 # add bin to path (add additional commands to PATH in ~/bin folder)
 # export PATH="/home/$USER/bin:$PATH"
@@ -67,35 +69,6 @@ export PATH="/usr/local/sbin:$PATH"
 # Custom
 # Match names regardless of capitalization, but try to match exact first
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-
-# nvm initialization
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# place this after nvm initialization!
-# calls nvm use automatically if it encounters a .nvmrc file and sets the correct version
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-fpath=($fpath "$HOME/.zfunctions")
 
 # Bottom line settings
 source $ZSH/oh-my-zsh.sh
