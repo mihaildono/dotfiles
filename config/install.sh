@@ -22,14 +22,10 @@ chmod +x zshinstall.sh
 rm zshinstall.sh
 
 # Add zsh plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-
-echo "\nInstalling NVM and node...\n"
-mkdir ~/.nvm
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-nvm install node
+git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
 
 echo "\nInstalling npm packages...\n"
 npm install -g typescript typescript-language-server # --allow-root --unsafe-perm=true
@@ -47,14 +43,10 @@ echo "\nHappy Hacking!\n"
 # wget -O zshinstall.sh https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
 # brew install autojump markdown the_silver_searcher
 # Add zsh plugins
-# git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
+# git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 # git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-
-# echo "\nInstalling NVM and node...\n"
-# mkdir ~/.nvm
-# wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-# nvm install node
+# git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
 
 # echo "\nInstalling npm packages...\n"
 # npm install -g typescript typescript-language-server # --allow-root --unsafe-perm=true
