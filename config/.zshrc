@@ -11,6 +11,15 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Variables
 export ZSH="$HOME/.oh-my-zsh"
 export TERM="xterm-256color" # This sets up colors properly
+# add bin to path (add additional commands to PATH in ~/bin folder)
+# export PATH="/home/$USER/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH" # This is for MacOS
+
+# plugins
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+export NVM_AUTO_USE=true
+export NVM_NO_USE=true
 
 # Aliases
 # directory
@@ -39,14 +48,6 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1    # Performance boost
 HIST_STAMPS="%d/%m/%y %T"          # Show date of command
 DISABLE_UNTRACKED_FILES_DIRTY=true # Not show untracked files
 
-# persist history
-HISTSIZE=50000              # How many lines of history to keep in memory
-HISTFILE=~/.zsh_history     # Where to save history to disk
-SAVEHIST=50000              # Number of history entries to save to disk
-setopt appendhistory        # Append history to the history file (no overwriting)
-setopt sharehistory         # Share history across terminals
-setopt incappendhistory     # Immediately append to the history file, not just when a term is killed
-
 plugins=(
     zsh-syntax-highlighting
     zsh-autosuggestions
@@ -55,16 +56,6 @@ plugins=(
     command-not-found
     zsh-nvm
 )
-
-# Plugin settings
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3" # change color of suggestion
-export NVM_LAZY_LOAD=true
-export NVM_COMPLETION=true
-
-# add bin to path (add additional commands to PATH in ~/bin folder)
-# export PATH="/home/$USER/bin:$PATH"
-# This is for MacOS
-export PATH="/usr/local/sbin:$PATH"
 
 # Custom
 # Match names regardless of capitalization, but try to match exact first
