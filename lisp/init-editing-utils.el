@@ -43,14 +43,17 @@
 ;; Delete selection when start writing.
 (delete-selection-mode t)
 
-;; Change color of some important words.
-(add-hook
- 'prog-mode-hook
- (lambda ()
-   (font-lock-add-keywords
-    nil
-    '(("\\<\\(FIX\\(ME\\)?\\|TODO\\|HACK\\|NOTE\\|REFACTOR\\|NOCOMMIT\\|OPTIMIZE\\)"
-       1 font-lock-warning-face t)))))
+;; TODO:
+(require-package 'hl-todo)
+(global-hl-todo-mode)
+(setq hl-todo-highlight-punctuation ":"
+          hl-todo-keyword-faces
+          `(("TODO"       warning bold)
+            ("FIX"      error bold)
+            ("HACK"       font-lock-constant-face bold)
+            ("REVIEW"     font-lock-keyword-face bold)
+            ("NOTE"       success bold)
+            ("DEPRECATED" font-lock-doc-face bold)))
 
 ;; shows line for current level of indentation
 (require-package 'indent-guide)
