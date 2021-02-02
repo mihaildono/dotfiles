@@ -44,9 +44,13 @@
 (delete-selection-mode t)
 
 ;; Change color of some important words.
-(font-lock-add-keywords
- nil '(("\\<\\(FIX\\(ME\\)?\\|TODO\\|HACK\\|NOTE\\|REFACTOR\\|NOCOMMIT\\|OPTIMIZE\\)"
-        1 font-lock-warning-face t)))
+(add-hook
+ 'prog-mode-hook
+ (lambda ()
+   (font-lock-add-keywords
+    nil
+    '(("\\<\\(FIX\\(ME\\)?\\|TODO\\|HACK\\|NOTE\\|REFACTOR\\|NOCOMMIT\\|OPTIMIZE\\)"
+       1 font-lock-warning-face t)))))
 
 ;; shows line for current level of indentation
 (require-package 'indent-guide)

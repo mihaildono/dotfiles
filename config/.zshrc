@@ -61,6 +61,10 @@ plugins=(
 # Match names regardless of capitalization, but try to match exact first
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
+# TODO: This must be removed, when emacs can auto-detect node and add it to PATH
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 # Bottom line settings
 source $ZSH/oh-my-zsh.sh
 

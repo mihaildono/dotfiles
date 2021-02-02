@@ -9,6 +9,25 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . web-mode))
 
+;; tsconfig.json or jsconfig.json is present in the root folder of the project.
+;; this works on MacOS
+(require-package 'tide)
+;; this may not be needed fo
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+(add-hook 'web-mode-hook #'setup-tide-mode)
+
 (setq web-mode-markup-indent-offset 4)
 (setq web-mode-code-indent-offset 4)
 
