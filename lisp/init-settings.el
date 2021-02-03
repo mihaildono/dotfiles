@@ -8,6 +8,8 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
+
+;; change command to be meta key on macOS
 (setq mac-command-modifier 'meta)
 
 ;; Highlight current line.
@@ -33,6 +35,8 @@
 ;; Suppress GUI features
 (setq use-file-dialog nil)
 (setq use-dialog-box nil)
+(setq inhibit-startup-message t)
+(setq default-directory "~/")
 (setq inhibit-startup-screen t)
 
 ;; Change window name to current file
