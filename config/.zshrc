@@ -27,6 +27,7 @@ alias ..="cd .."
 alias l="ls -la"
 
 # git
+alias gf="git fetch"
 alias gbr="git branch"
 alias g="git"
 alias gs="git status -s"

@@ -41,7 +41,7 @@ echo "\nHappy Hacking!\n"
 # Install brew packages
 # Install zsh
 # wget -O zshinstall.sh https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
-# brew install autojump markdown the_silver_searcher
+# brew install autojump markdown the_silver_searcher aspell
 # Add zsh plugins
 # git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 # git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
