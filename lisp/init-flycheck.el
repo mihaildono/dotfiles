@@ -5,6 +5,7 @@
 (when (maybe-require-package 'flycheck)
   (add-hook 'after-init-hook 'global-flycheck-mode)
   ;; display error messages in the echo area
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
   (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list))
 
 ;; config file
