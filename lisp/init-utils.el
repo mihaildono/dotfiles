@@ -80,6 +80,23 @@
         (error "Cannot open tramp file")
       (browse-url (concat "file://" file-name)))))
 
+;;----------------------------------------------------------------------------
+;; Revert to basic settings when opening big files
+;;----------------------------------------------------------------------------
+(defcustom my-large-file-threshold (* 100 1024)
+  "File size threshold for `my-large-file-behaviours'.")
+
+(defun my-large-file-behaviours ()
+  "React to files which are larger than a given size."
+  (when (> (buffer-size) my-large-file-threshold)
+    (message "%s" "Large file detected.")
+    (prog-mode)
+    (when (bound-and-true-p indent-guide-mode)
+      (indent-guide-mode 0))))
+
+(add-hook 'find-file-hook 'my-large-file-behaviours)
+
+
 
 (provide 'init-utils)
 ;;; init-utils.el ends here
