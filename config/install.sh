@@ -38,6 +38,7 @@ echo "\nHappy Hacking!\n"
 # MacOS
 # Install brew
 # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# curl -fsSL https://fnm.vercel.app/install | bash
 # Install brew packages
 # Install zsh
 # wget -O zshinstall.sh https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
