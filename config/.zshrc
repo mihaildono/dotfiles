@@ -27,6 +27,7 @@ alias l="ls -la"
 
 # git
 alias gf="git fetch"
+alias gfm="git fetch origin master:master"
 alias gbr="git branch"
 alias g="git"
 alias gs="git status -s"
@@ -40,6 +41,7 @@ alias gcl="git clone"
 alias gl="git log --pretty=format:'%C(yellow)%h %Cred%ar %Cblue%an%Cgreen%d %Creset%s' --date=short"
 alias grbi="git rebase -i"
 alias grb="git rebase"
+alias gr="git reset $(git merge-base master $(git branch --show-current))"
 
 # General settings
 COMPLETION_WAITING_DOTS="true"     # Display red dots whilst waiting for completion.

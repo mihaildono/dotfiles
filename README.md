@@ -19,3 +19,8 @@ For Linux use auto-installer:
 ```
 $ sh ~/.emacs.d/config/install.sh
 ```
+For MacOS check commented installer at:
+
+```
+sh ~/.emacs.d/config/install.sh
+```
