@@ -41,7 +41,7 @@ alias gcl="git clone"
 alias gl="git log --pretty=format:'%C(yellow)%h %Cred%ar %Cblue%an%Cgreen%d %Creset%s' --date=short"
 alias grbi="git rebase -i"
 alias grb="git rebase"
-alias gr="git reset $(git merge-base master $(git branch --show-current))"
+alias gr='git reset $(git merge-base master $(git branch --show-current))'
 
 # General settings
 COMPLETION_WAITING_DOTS="true"     # Display red dots whilst waiting for completion.
