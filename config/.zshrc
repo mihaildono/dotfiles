@@ -42,8 +42,7 @@ alias gl="git log --pretty=format:'%C(yellow)%h %Cred%ar %Cblue%an%Cgreen%d %Cre
 alias grbi="git rebase -i"
 alias grb="git rebase"
 alias gr='git reset $(git merge-base master $(git branch --show-current))'
-alias gbrd='git branch --merged | grep -v \* | xargs git branch -D' # delete merged branches
-
+alias gbrd='git branch | grep -v "main" | grep -v "master" | grep -v "live" | xargs git branch -D
 
 # General settings
 COMPLETION_WAITING_DOTS="true"     # Display red dots whilst waiting for completion.
@@ -53,7 +52,6 @@ HIST_STAMPS="%d/%m/%y %T"          # Show date of command
 DISABLE_UNTRACKED_FILES_DIRTY=true # Not show untracked files
 
 plugins=(
-    zsh-syntax-highlighting
     zsh-autosuggestions
     autojump
     last-working-dir
@@ -76,3 +74,10 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# fnm
+export PATH="/Users/mihailgeorgiev/Library/Application Support/fnm:$PATH"
+eval "`fnm env`"
+
+# python
+eval "$(pyenv init --path)"
