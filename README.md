@@ -13,14 +13,14 @@ After dot files
 # Installation
 Clone repo:
 ``` sh
-$ git clone git@github.com:mihaildono/dotfiles.git ~/.emacs
+$ git clone git@github.com:mihaildono/dotfiles.git
 ```
 For Linux use auto-installer:
 ```
-$ sh ~/.emacs.d/config/install.sh
+$ sh config/install.sh
 ```
-For MacOS check commented installer at:
+For MacOS uncomment installer at:
 
 ```
-sh ~/.emacs.d/config/install.sh
+sh config/install.sh
 ```
