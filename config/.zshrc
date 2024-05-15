@@ -27,7 +27,7 @@ alias l="ls -la"
 
 # git
 alias gf="git fetch"
-alias gfm="git fetch origin master:master"
+alias gfm="git fetch origin main:main"
 alias gbr="git branch"
 alias g="git"
 alias gs="git status -s"
@@ -43,6 +43,8 @@ alias grbi="git rebase -i"
 alias grb="git rebase"
 alias gr='git reset $(git merge-base master $(git branch --show-current))'
 alias gbrd='git branch | grep -v "main" | grep -v "master" | grep -v "live" | xargs git branch -D
+' # delete merged branches
+
 
 # General settings
 COMPLETION_WAITING_DOTS="true"     # Display red dots whilst waiting for completion.
@@ -81,3 +83,6 @@ eval "`fnm env`"
 
 # python
 eval "$(pyenv init --path)"
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
