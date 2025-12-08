@@ -68,9 +68,6 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" ||# printf %s "${XDG_CONFIG_HOME}/nvm")"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-# node version manager
-eval "$(fnm env --use-on-cd)"
-
 # Bottom line settings
 source $ZSH/oh-my-zsh.sh
 
@@ -79,7 +76,7 @@ source $ZSH/oh-my-zsh.sh
 
 # fnm
 export PATH="/Users/mihailgeorgiev/Library/Application Support/fnm:$PATH"
-eval "`fnm env`"
+eval "$(fnm env --use-on-cd --version-file-strategy recursive)"
 
 # python
 eval "$(pyenv init --path)"
